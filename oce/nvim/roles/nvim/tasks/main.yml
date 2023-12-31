@@ -51,7 +51,7 @@
 
 - name: Nvim repo
   ansible.builtin.git:
-    repo: "{{ config_repo }}
+    repo: "{{ config_repo }}"
     dest: ~/.config/nvim
 
 - name: Packer Setup

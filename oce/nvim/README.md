@@ -1,3 +1,9 @@
-# Ansible Collection - oce.config
+# nvim
 
-Documentation for the collection.
+## Ansible
+
+### Run
+
+```
+ansible-playbook -vvvv nvim.yml --ask-become-pass
+```
