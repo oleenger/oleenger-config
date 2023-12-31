@@ -1,0 +1,34 @@
+---
+- name: "Ensure old neovim from repository is absent."
+  ansible.builtin.apt:
+    name: neovim
+    state: absent
+
+- name: "Landing place for nvim download exists."
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+    path: "{{ dl_dir }}"
+
+- name: "Ensure nvim appimage downloaded"
+  become: true
+  become_user: root
+  ansible.builtin.get_url:
+    url: "{{ appimage_url }}"
+    dest: "{{ dl_dir }}/nvim.appimage"
+    mode: 0555
+
+- name: "Ensure 'nvim' installed"
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: "{{ dl_dir }}/nvim.appimage"
+    dest: /usr/local/bin/nvim
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: true

@@ -1,0 +1,12 @@
+---
+- name: Install Packer
+  ansible.builtin.git:
+    repo: https://github.com/wbthomason/packer.nvim  
+    dest: "{{ home_folder }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+
+- name: Packer Setup
+  ansible.builtin.shell:
+    cmd: "{{ item }}"
+  with_items:
+    - "/usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+    - "/usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"

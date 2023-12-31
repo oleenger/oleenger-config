@@ -1,0 +1,9 @@
+---
+- name: Clean nvim directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ home_folder }}/.local/share/nvim"
+    - "{{ home_folder }}/.local/state/nvim"
+    - "{{ home_folder }}/.cache/nvim"
