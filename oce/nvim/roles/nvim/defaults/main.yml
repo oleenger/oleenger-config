@@ -1,0 +1,9 @@
+---
+user: oleenger
+home_folder: "/home/{{ user }}"
+
+neovim_version: "0.9.4"
+nvim_appimage_url: "https://github.com/neovim/neovim/releases/download/v{{ neovim_version }}/nvim.appimage"
+nvim_dl_dir: "/opt/nvim/{{ neovim_version }}"
+
+config_repo: https://github.com/oleenger/nvim.git

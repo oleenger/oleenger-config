@@ -1,0 +1,6 @@
+---
+- name: neovim
+  hosts:
+    localhost
+  roles:
+    - role: "../roles/nvim"

@@ -1,0 +1,63 @@
+---
+- name: Clean nvim directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ home_folder }}/.local/share/nvim"
+    - "{{ home_folder }}/.local/state/nvim"
+    - "{{ home_folder }}/.cache/nvim"
+  tags: cleanup
+
+- name: "Ensure old neovim from repository is absent."
+  ansible.builtin.apt:
+    name: neovim
+    state: absent
+
+- name: "Landing place for nvim download exists."
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+    path: "{{ nvim_dl_dir }}"
+
+- name: "Ensure nvim appimage downloaded v{{ neovim_version }}"
+  become: true
+  become_user: root
+  ansible.builtin.get_url:
+    url: "{{ nvim_appimage_url }}"
+    dest: "{{ nvim_dl_dir }}/nvim.appimage"
+    mode: 0555
+
+- name: "Ensure 'nvim' installed v{{ neovim_version }}"
+  become: true
+  become_user: root
+  ansible.builtin.copy:
+    src: "{{ nvim_dl_dir }}/nvim.appimage"
+    dest: /usr/local/bin/nvim
+    owner: root
+    group: root
+    mode: '0755'
+    remote_src: true
+
+- name: Install Packer
+  ansible.builtin.git:
+    repo: https://github.com/wbthomason/packer.nvim  
+    dest: "{{ home_folder }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  tags: packer-install
+
+- name: Nvim repo
+  ansible.builtin.git:
+    repo: "{{ config_repo }}
+    dest: ~/.config/nvim
+
+- name: Packer Setup
+  ansible.builtin.shell:
+    cmd: "{{ item }}"
+  with_items:
+    - "/usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+    - "/usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+  tags: packer
