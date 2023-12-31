@@ -1,5 +1,0 @@
----
-- name: Nvim repo
-  ansible.builtin.git:
-    repo: "{{ config_repo }}"
-    dest: "{{ config_folder }}"

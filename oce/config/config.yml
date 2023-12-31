@@ -1,0 +1,7 @@
+---
+- name: config
+  hosts:
+    localhost
+  roles:
+    - role: "../roles/config"
+

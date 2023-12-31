@@ -1,0 +1,4 @@
+---
+config:
+  folder: "{{ home_folder }}/.config"
+  repo: https://github.com/oleenger/config.git
