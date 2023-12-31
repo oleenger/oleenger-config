@@ -2,7 +2,7 @@
 user: oleenger
 home_folder: "/home/{{ user }}"
 
-version: "0.9.4"
+version: "0.9.5"
 appimage_url: "https://github.com/neovim/neovim/releases/download/v{{ version }}/nvim.appimage"
 dl_dir: "/opt/nvim/{{ version }}"
 config_folder: "{{ home_folder }}/.config/nvim"

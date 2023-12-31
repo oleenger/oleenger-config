@@ -7,10 +7,10 @@
   ansible.builtin.import_tasks: install.yml
   tags: install
 
-- name: Install Packer
-  ansible.builtin.import_tasks: packer.yml
-  tags: packer
-
 - name: Nvim Config
   ansible.builtin.import_tasks: config.yml
   tags: config
+
+- name: Install Packer
+  ansible.builtin.import_tasks: packer.yml
+  tags: packer
