@@ -1,0 +1,14 @@
+---
+- name: Download Stylua
+  ansible.builtin.get_url:
+    url: https://github.com/JohnnyMorganz/StyLua/releases/download/v0.19.1/stylua-linux-x86_64.zip
+    dest: /tmp/stylua.zip
+    mode: 0644
+
+- name: Unzip Stylua
+  become: true
+  become_user: root
+  ansible.builtin.unarchive:
+    src: /tmp/stylua.zip
+    dest: /usr/local/bin
+

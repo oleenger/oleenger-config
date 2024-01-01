@@ -10,3 +10,7 @@
 - name: Install Packer
   ansible.builtin.import_tasks: packer.yml
   tags: packer
+
+- name: Install Stylua Formatter for Lua
+  ansible.builtin.import_tasks: stylua.yml
+  tags: stylua
